@@ -34,7 +34,7 @@ class Autosuggest
             if(strlen($word)>1)
             {
                 $wd = preg_replace('/\'[^.]+$/', '', preg_replace('/\./', '', $word));
-                $wd = preg_replace('/[^a-z\-]/', '', $wd);
+                //$wd = preg_replace('/[^a-z\-]/', '', $wd);
                 $fwords[] = $wd;
             }
         }
@@ -85,7 +85,7 @@ class Autosuggest
 
         while ($k < $this->lwl)
         {
-            foreach (range('A', 'Z') as $letter)
+            foreach (range('क', 'ज्ञ') as $letter)
             {
                 $elements[$letter] = array();
             }
@@ -146,12 +146,14 @@ class Autosuggest
         {
             $totalWords += $this->wordFreqs[$word];
         }
-        //calculate their percentages
-        foreach ($words as $word)
-        {
-            $freq = $this->wordFreqs[$word];
-            $percentages[$word] = $freq / $totalWords * 100;
-        }
+        if(!empty($words)){
+        	//calculate their percentages
+	        foreach ($words as $word)
+	        {
+	            $freq = $this->wordFreqs[$word];
+	            $percentages[$word] = $freq / $totalWords * 100;
+	        }
+    	}
 
         return $percentages;
 
